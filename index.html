@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,700');
+        *,
+        *:after,
+        *:before {
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        body,
+        html {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            background-color: #161616;
+            margin: 0;
+        }
+        
+        
+        /*slider styles*/
+        .rgbShiftSlider {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /*mix-blend-mode: hard-light;*/
+            opacity: 0.85;
+            width: 100vw;
+            height: 100%;
+            overflow: hidden;
+            /*transform-origin : 50vw 300vh;*/
+            transform-origin: 50% 50%;
+        }
+
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 0;
+        }
+        
+        nav {
+            position: absolute;
+            top: 4vw;
+            left: 4vw;
+            z-index: 1;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 14px;
+        }
+    </style>
+    
+    <!-- slider -->
+    <div id="rbgShiftSlider" class="rgbShiftSlider"></div>
+
+    <!-- slider nav -->
+    <nav>
+        <a href="#" class="scene-nav prev" data-nav="previous">Prev</a>
+        <a href="#" class="scene-nav next" data-nav="next">Next</a>
+    </nav>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.7/pixi.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script src="js/rgbShiftSlider.js"></script>
+    <script>
+
+  
+        // set images
+        var images = [
+            "http://localhost/hmongouachon-exp/pixi-exp/assets/05-large.jpg",
+            "http://localhost/hmongouachon-exp/pixi-exp/assets/06-large.jpg",
+            "http://localhost/hmongouachon-exp/pixi-exp/assets/01-large.jpg",
+        ]
+        // instanciate slider
+        var rbgShiftSlider = new rbgShiftSlider({
+            navElement: '.scene-nav',
+            slideImages: images,
+            stageWidth: 1387,
+            stageHeight: 780,
+            displacementImage: 'http://localhost/hmongouachon-2019-webgl/app/img/displacement/displace-circle.png',
+            fullScreen: true,
+            transitionDuration: 0.25,
+            transitionFilterIntensity: 350,
+            transitionSpriteIntensity: 2,
+            mouseDispIntensity: 3,
+            interactive : true,
+            autoPlay : false,
+            autoPlaySpeed : 5000,
+        });
+    </script>
+</body>
+
+</html>
