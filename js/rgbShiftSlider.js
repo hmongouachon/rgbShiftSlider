@@ -26,6 +26,7 @@
           options.displacementImage = options.hasOwnProperty('displacementImage') ? options.displacementImage : '';
           options.fullScreen = options.hasOwnProperty('fullScreen') ? options.fullScreen : true;
           options.transitionDuration = options.hasOwnProperty('transitionDuration') ? options.transitionDuration : 0.25;
+          options.transitionGhostDuration = options.hasOwnProperty('transitionGhostDuration') ? options.transitionGhostDuration : 0.25;
           options.transitionFilterIntensity = options.hasOwnProperty('transitionFilterIntensity') ? options.transitionFilterIntensity : 350;
           options.transitioSpriteIntensity = options.hasOwnProperty('transitioSpriteIntensity') ? options.transitioSpriteIntensity : 2;
           options.mouseDispIntensity = options.hasOwnProperty('mouseDispIntensity') ? options.mouseDispIntensity : 3;
@@ -249,7 +250,7 @@
 
                       // fake user gesture from left to right
                       TweenMax
-                          .to(ghostEl, 0.25, {
+                          .to(ghostEl, options.transitionGhostDuration , {
                               x: screen.width,
                               ease: Power0.easeOut,
                           })
@@ -277,6 +278,8 @@
                           displacementFilters[i].scale.x = Math.atan(node_xp - (displacementSprites[i].x)) * (baseTimeline.progress() * options.transitionFilterIntensity);
                           displacementSprites[i].position.x = node_yp * (baseTimeline.progress() * options.transitionSpriteIntensity);
                       }
+
+                      console.log(ghostEl.x)
 
                   }
 
@@ -333,7 +336,6 @@
               cancelAnimationFrame(rafId_transition);
 
               // make sure basetimeline is not running
-              baseTimeline.clear();
               if (baseTimeline.isActive()) {
                   return;
               }

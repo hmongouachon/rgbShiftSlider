@@ -11,7 +11,7 @@
 
 <body>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,700');
+        @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
         *,
         *:after,
         *:before {
@@ -30,6 +30,23 @@
         body {
             background-color: #161616;
             margin: 0;
+        }
+
+        p, a {
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        .notice {
+            position: absolute;
+            top : 4vw;
+            right : 4vw;
+            color: white;
+            z-index: 1;
+
+        }
+
+        .notice a{
+            color: white;
         }
         
         
@@ -68,6 +85,10 @@
             margin-right: 14px;
         }
     </style>
+
+    <div class="notice">
+        <p>Find this project on <a href="https://github.com/hmongouachon/rgbShiftSlider" target="_blank">Github</a></p>
+    </div>
     
     <!-- slider -->
     <div id="rbgShiftSlider" class="rgbShiftSlider"></div>
@@ -98,7 +119,8 @@
             stageHeight: 780,
             displacementImage: 'http://localhost/hmongouachon-2019-webgl/app/img/displacement/displace-circle.png',
             fullScreen: true,
-            transitionDuration: 0.25,
+            transitionDuration: 0.35, // must be > transitionGhostDuration
+            transitionGhostDuration : 0.25,
             transitionFilterIntensity: 350,
             transitionSpriteIntensity: 2,
             mouseDispIntensity: 3,
