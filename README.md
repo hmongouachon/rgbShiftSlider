@@ -1,6 +1,8 @@
 # rgbShiftSlider
 
 rgbShiftSlider is a tiny js slider with rgb displacement animations. 
+Check the demo of this project on codepen : View the demo of this project on [codepen](https://codepen.io/hmongouachon/pen/eYObzPq) 
+
 
 ## Dependencies :
 ```
