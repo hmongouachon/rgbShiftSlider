@@ -6,6 +6,7 @@ rgbShiftSlider is a tiny js slider with rgb displacement animations.
 ```
 https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.7/pixi.min.js
 https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js
+js/rgbShiftSlider.min.js
 ```
 
 ## Markups :
@@ -27,7 +28,6 @@ navElement: '.scene-nav',
 slideImages: images,
 stageWidth: 1920,
 stageHeight: 1080,
-
 displacementImage: 'assets/displace-circle.png',
 fullScreen: true,
 transitionDuration: 0.35, // must be 0.1 > transitionGhostDuration
