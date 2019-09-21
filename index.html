@@ -107,25 +107,28 @@
   
         // set images
         var images = [
-            "http://localhost/hmongouachon-exp/pixi-exp/assets/05-large.jpg",
-            "http://localhost/hmongouachon-exp/pixi-exp/assets/06-large.jpg",
-            "http://localhost/hmongouachon-exp/pixi-exp/assets/01-large.jpg",
+            "assets/01-portrait-large.jpg",
+            "assets/02-portrait-large.jpg",
+            "assets/03-portrait-large.jpg",
+            "assets/04-portrait-large.jpg",
+            "assets/05-portrait-large.jpg",
         ]
         // instanciate slider
         var rbgShiftSlider = new rbgShiftSlider({
+            nav : true,
             navElement: '.scene-nav',
             slideImages: images,
-            stageWidth: 1387,
-            stageHeight: 780,
-            displacementImage: 'http://localhost/hmongouachon-2019-webgl/app/img/displacement/displace-circle.png',
+            stageWidth: 1920,
+            stageHeight: 1080,
+            displacementImage: 'assets/displace-circle.png',
             fullScreen: true,
-            transitionDuration: 0.35, // must be > transitionGhostDuration
+            transitionDuration: 0.35, // must be 0.1 > transitionGhostDuration
             transitionGhostDuration : 0.25,
             transitionFilterIntensity: 350,
             transitionSpriteIntensity: 2,
             mouseDispIntensity: 3,
             interactive : true,
-            autoPlay : false,
+            autoPlay : true,
             autoPlaySpeed : 5000,
         });
     </script>

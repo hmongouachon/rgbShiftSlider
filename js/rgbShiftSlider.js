@@ -30,7 +30,8 @@
           options.transitionFilterIntensity = options.hasOwnProperty('transitionFilterIntensity') ? options.transitionFilterIntensity : 350;
           options.transitioSpriteIntensity = options.hasOwnProperty('transitioSpriteIntensity') ? options.transitioSpriteIntensity : 2;
           options.mouseDispIntensity = options.hasOwnProperty('mouseDispIntensity') ? options.mouseDispIntensity : 3;
-          options.navElement = options.hasOwnProperty('navElement') ? options.navElement : document.querySelectorAll('.scene-nav');
+          options.nav = options.hasOwnProperty('nav') ? options.nav : true;
+          options.navElement = options.hasOwnProperty('navElement') ? options.navElement : '.scene-nav';
           options.interactive = options.hasOwnProperty('interactive') ? options.interactive : true;
           options.autoPlay = options.hasOwnProperty('autoPlay') ? options.autoPlay : true;
           options.autoPlaySpeed = options.hasOwnProperty('autoPlaySpeed') ? options.autoPlaySpeed : 3000;
@@ -91,6 +92,9 @@
           var currentIndex = 0;
 
           var isPlaying = false;
+          
+          // autoplay
+          var interval, autoplay;
 
           ///////////////////////////////    
 
@@ -279,7 +283,7 @@
                           displacementSprites[i].position.x = node_yp * (baseTimeline.progress() * options.transitionSpriteIntensity);
                       }
 
-                      console.log(ghostEl.x)
+                      // console.log(ghostEl.x)
 
                   }
 
@@ -402,36 +406,90 @@
 
           ///////////////////////////////
 
-          var nav = document.querySelectorAll('.scene-nav');
+          
 
-          for (var i = 0; i < nav.length; i++) {
+          if(options.nav === true) {
 
-              var navItem = nav[i];
+            var nav = document.querySelectorAll(options.navElement);
 
-              navItem.onclick = function(event) {
+              for (var i = 0; i < nav.length; i++) {
 
-                  // Make sure the previous transition has ended
-                  if (isPlaying) {
+                  var navItem = nav[i];
+
+                  navItem.onclick = function(event) {
+
+                      // Make sure the previous transition has ended
+                      if (isPlaying) {
+                          return false;
+                      }
+
+                      if (this.getAttribute('data-nav') === 'next') {
+
+                          if (currentIndex >= 0 && currentIndex < options.slideImages.length - 1) {
+                              next_slide(currentIndex + 1);
+                          } else {
+                              next_slide(0);
+                          }
+                          if(options.autoPlay === true) {
+                            // re init autoplay
+                            clearInterval(interval);
+                            autoplay();
+                          }
+                      } else {
+                          if (currentIndex > 0 && currentIndex < options.slideImages.length) {
+                              next_slide(currentIndex - 1);
+                          } else {
+                              next_slide(options.slideImages.length - 1);
+                          }
+
+                          if(options.autoPlay === true) {
+                            // re init autoplay
+                            clearInterval(interval);
+                            autoplay();
+                          }
+                      }
                       return false;
                   }
 
-                  if (this.getAttribute('data-nav') === 'next') {
-                      if (currentIndex >= 0 && currentIndex < options.slideImages.length - 1) {
-                          next_slide(currentIndex + 1);
-                      } else {
-                          next_slide(0);
-                      }
-                  } else {
-                      if (currentIndex > 0 && currentIndex < options.slideImages.length) {
-                          next_slide(currentIndex - 1);
-                      } else {
-                          next_slide(options.slideImages.length - 1);
-                      }
-                  }
-                  return false;
               }
-
           }
+
+
+          ///////////////////////////////    
+
+          //  autoplay
+
+          ///////////////////////////////
+
+          function autoplay(){
+              interval = setInterval(function() {
+
+                  // if (isPlaying) {
+                  //         return false;
+                  //     }
+
+                  currentIndex = currentIndex + 1;
+
+                  if (currentIndex === options.slideImages.length) {
+                      currentIndex = 0;
+                      next_slide(currentIndex);
+                  } else {
+                      next_slide(currentIndex);
+                  }
+
+                  // // clear after x seconds
+                  // if (Date.now() - started > 15000) {
+                  //   // pause it
+                  //   // clearInterval(interval);
+                  // } 
+                  // else {
+                  //   // the thing to do every 100ms
+                  // }
+
+
+              }, options.autoPlaySpeed); // default 3000ms
+          };
+
 
           ///////////////////////////////    
 
@@ -450,44 +508,8 @@
                   currentIndex = 0;
 
                   next_slide(currentIndex);
-
-                  // make it loop every 100 milliseconds
-                  var interval = setInterval(function() {
-
-                      // if (isPlaying) {
-                      //         return false;
-                      //     }
-
-                      currentIndex = currentIndex + 1;
-
-                      if (currentIndex === options.slideImages.length) {
-                          currentIndex = 0;
-                          next_slide(currentIndex);
-                      } else {
-                          next_slide(currentIndex);
-
-
-                      }
-
-                      // // clear after 15 seconds
-                      // if (Date.now() - started > 15000) {
-
-                      //   // currentIndex = 0
-
-                      //   // and then pause it
-                      //   // clearInterval(interval);
-
-                      // } 
-
-                      // else {
-
-                      //   // the thing to do every 100ms
-
-
-                      // }
-
-
-                  }, options.autoPlaySpeed); // default 3000ms
+                  autoplay();
+                  
 
               } else {
 
