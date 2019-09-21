@@ -399,14 +399,13 @@
 
               }
           };
+          
 
           ///////////////////////////////    
 
           //  navigation
 
           ///////////////////////////////
-
-          
 
           if(options.nav === true) {
 
@@ -501,25 +500,19 @@
               build_scene();
               build_RGBcontainers();
 
-
               if (options.autoPlay === true) {
 
                   var started = Date.now();
                   currentIndex = 0;
-
                   next_slide(currentIndex);
                   autoplay();
-                  
 
               } else {
-
                   next_slide(0);
-
               }
-
           };
-
-
+          
+          // let's go
           init_slider();
       };
 
